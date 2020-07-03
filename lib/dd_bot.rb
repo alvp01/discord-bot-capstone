@@ -7,6 +7,5 @@ class DwarfBot
 
   def initialize
     @discord_bot = Discordrb::Commands::CommandBot.new token: ENV['BOT_TOKEN'], client_id: ENV['CLIENT_ID'], prefix: '*'
-    
   end
 end
