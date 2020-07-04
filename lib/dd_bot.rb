@@ -26,14 +26,13 @@ class DwarfBot
   end
 
   def bot_commands(bot)
-
     bot_roll(bot)
 
-    bot.ready do |event|
-      var = bot.find_channel("general")
+    bot.ready do |_event|
+      var = bot.find_channel('general')
       var.each do |i|
-        bot.send_message(i.id, "bot is ready")
-        pp "quejesto"
+        bot.send_message(i.id, 'bot is ready')
+        pp 'quejesto'
       end
     end
   end
