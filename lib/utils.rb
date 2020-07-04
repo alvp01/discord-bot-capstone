@@ -5,8 +5,14 @@ def msg_splitter(msg)
   split_str
 end
 
-def msg_validator(msg)
-  return true if msg.index /\d*d(4|6|8|12|20|100)/
-  
-  false
+def msg_validator(arr)
+  v = true
+  arr[1].each do |elem|
+    if (elem.include? 'd')
+      v = v && elem.match?(/\d*d{1}(4|6|8|10|12|20|100)/)
+    else
+      v = v && elem.match?(/\d+/)
+    end
+  end
+  v
 end

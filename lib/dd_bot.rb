@@ -42,8 +42,7 @@ class DwarfBot
     desc = "Type \"#{ENV['BOT_PREFIX']} roll d + num"
     bot.command :roll, description: desc do |event|
       arr = msg_splitter(event.message.content.delete_prefix('pls roll '))
-      p msg_validator(event.message.content.delete_prefix('pls roll '))
-      pp arr
+      msg_validator(arr)
       event.respond 'derps!'
     end
   end
