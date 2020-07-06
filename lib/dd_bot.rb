@@ -32,7 +32,6 @@ class DwarfBot
       var = bot.find_channel('general')
       var.each do |i|
         bot.send_message(i.id, 'bot is ready')
-        pp 'quejesto'
       end
     end
   end
@@ -41,8 +40,8 @@ class DwarfBot
     desc = "Type \"#{ENV['BOT_PREFIX']} roll d + num"
     bot.command :roll, description: desc do |event|
       arr = msg_splitter(event.message.content.delete_prefix('pls roll '))
-      msg_validator(arr)
-      event.respond 'derps!'
+      dice_get(arr)
+      event.respond 'valid input' if msg_validator(arr)
     end
   end
 

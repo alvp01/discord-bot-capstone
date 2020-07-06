@@ -8,11 +8,18 @@ end
 def msg_validator(arr)
   v = true
   arr[1].each do |elem|
-    v = if elem.include? 'd'
-          v && elem.match?(/\d*d{1}(4|6|8|10|12|20|100)/)
-        else
-          v && elem.match?(/\d+/)
-        end
+    v &&= if elem.match?(/\d*d{1}(4|6|8|10|12|20|100)\z/)
+            true
+          elsif elem.eql? 'adv' or elem.eql? 'dis'
+            true
+          else
+            (elem.match?(/\d+/) and !elem.match?(/[a-z]/))
+          end
   end
   v
+end
+
+def dice_get(arr)
+  x = arr[1][0]
+  puts x
 end
