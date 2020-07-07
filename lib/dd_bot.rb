@@ -8,9 +8,6 @@ class DwarfBot
 
   def initialize
     @tkn = ENV['BOT_TOKEN']
-    @roll_adv = false
-    @roll_dis = false
-    @roll_result = 0
     create_bot
   end
 
@@ -44,29 +41,30 @@ class DwarfBot
     bot.command :roll, description: desc do |event|
       arr = msg_splitter(event.message.content.delete_prefix('pls roll '))
       if msg_validator(arr)
-        @roll_adv = true if arr[1].include? 'adv'
-        @roll_dis = true if arr[1].include? 'dis'
+        roll_adv = false
+        roll_dis = false
+        roll_adv = true if arr[1].include? 'adv'
+        roll_dis = true if arr[1].include? 'dis'
         arr[1].delete_if { |x| x.eql?('adv') or x.eql?('dis') }
-        puts roll_arbiter(arr)
+        roll_arbiter(arr, roll_adv, roll_dis)
         event.respond 'valid input'
       end
     end
   end
 
-  def roll_arbiter(full_arr)
-    if (@roll_adv and @roll_dis) or (!@roll_adv and !@roll_dis)
+  def roll_arbiter(full_arr, adv, dis)
+    if (adv and dis) or (!adv and !dis)
       dice_roll(full_arr)
     elsif @roll_adv
       puts 'hello 2'
     else
       puts 'hello 3'
     end
-    @roll_adv = false
-    @roll_dis = false
   end
 
-  def dice_roll(_arr)
-    puts 'hello'
+  def dice_roll(full_arr)
+    values = dice_parser(full_arr[1])
+    puts values
   end
 
   def bot_run(bot)

@@ -18,3 +18,11 @@ def msg_validator(arr)
   end
   v
 end
+
+def dice_parser(arr)
+  dices_values = []
+  arr.each do |e|
+    dices_values << e.scan(/\d+/)
+  end
+  dices_values
+end
