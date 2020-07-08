@@ -22,7 +22,16 @@ end
 def dice_parser(arr)
   dices_values = []
   arr.each do |e|
-    dices_values << e.scan(/\d+/)
+    dices_values << if e.include? 'd'
+                      e.split('d')
+                    else
+                      e.scan(/\A\d+\z/)
+                    end
   end
   dices_values
+end
+
+def val_translator(arr)
+  p arr
+  arr
 end

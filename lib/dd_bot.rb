@@ -64,7 +64,8 @@ class DwarfBot
 
   def dice_roll(full_arr)
     values = dice_parser(full_arr[1])
-    puts values
+    values = val_translator(values)
+    p values
   end
 
   def bot_run(bot)
