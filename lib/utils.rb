@@ -32,6 +32,14 @@ def dice_parser(arr)
 end
 
 def val_translator(arr)
-  p arr
-  arr
+  values = arr.map do |e|
+    e.map do |x|
+      if x.eql? ''
+        1
+      else
+        x.to_i
+      end
+    end
+  end
+  p values
 end
