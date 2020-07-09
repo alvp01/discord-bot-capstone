@@ -46,15 +46,17 @@ class DwarfBot
         roll_adv = true if arr[1].include? 'adv'
         roll_dis = true if arr[1].include? 'dis'
         arr[1].delete_if { |x| x.eql?('adv') or x.eql?('dis') }
-        roll_arbiter(arr, roll_adv, roll_dis)
-        event.respond 'valid input'
+        roll_arbiter(arr[0], arr[1], roll_adv, roll_dis)
+        event.respond "#{event.message.author.mention} roll"
       end
     end
   end
 
-  def roll_arbiter(full_arr, adv, dis)
+  def roll_arbiter(operators, operands, adv, dis)
+    values = dice_parser(operands)
+    values = val_translator(values)
     if (adv and dis) or (!adv and !dis)
-      dice_roll(full_arr)
+      dice_roll(operators, values)
     elsif @roll_adv
       puts 'hello 2'
     else
@@ -62,10 +64,9 @@ class DwarfBot
     end
   end
 
-  def dice_roll(full_arr)
-    values = dice_parser(full_arr[1])
-    values = val_translator(values)
-    p values
+  def dice_roll(operators, operands)
+    p operators
+    p operands
   end
 
   def bot_run(bot)

@@ -41,5 +41,5 @@ def val_translator(arr)
       end
     end
   end
-  p values
+  values
 end
