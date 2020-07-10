@@ -43,3 +43,21 @@ def val_translator(arr)
   end
   values
 end
+
+def dice_roller(arr)
+  return arr if arr.length.eql? 1
+
+  dices = []
+  arr[0].times do |_x|
+    dices << rand(1..arr[1])
+  end
+  dices
+end
+
+def calculator(op1, op2, ops)
+  res = []
+  x = op1.length != 1 ? op1.sum : op1[0]
+  y = op2.length != 1 ? op2.sum : op2[0]
+  x = ops == '+' ? x + y : x - y
+  res << x
+end

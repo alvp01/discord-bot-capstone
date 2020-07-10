@@ -1,3 +1,4 @@
+# Metrics/MethodLength: Max: 25
 require_relative './utils.rb'
 require 'discordrb'
 require 'dotenv'
@@ -40,23 +41,23 @@ class DwarfBot
     desc = "Type \"#{ENV['BOT_PREFIX']} roll d + num"
     bot.command :roll, description: desc do |event|
       arr = msg_splitter(event.message.content.delete_prefix('pls roll '))
-      if msg_validator(arr)
+      if event.message.content.match?(/\d*d\d+/) and msg_validator(arr)
         roll_adv = false
         roll_dis = false
         roll_adv = true if arr[1].include? 'adv'
         roll_dis = true if arr[1].include? 'dis'
         arr[1].delete_if { |x| x.eql?('adv') or x.eql?('dis') }
-        roll_arbiter(arr[0], arr[1], roll_adv, roll_dis)
+        roll_arbiter(arr[0], arr[1], roll_adv, roll_dis, event)
         event.respond "#{event.message.author.mention} roll"
       end
     end
   end
 
-  def roll_arbiter(operators, operands, adv, dis)
+  def roll_arbiter(operators, operands, adv, dis, event)
     values = dice_parser(operands)
     values = val_translator(values)
     if (adv and dis) or (!adv and !dis)
-      dice_roll(operators, values)
+      dice_roll(operators, values, event)
     elsif @roll_adv
       puts 'hello 2'
     else
@@ -64,9 +65,30 @@ class DwarfBot
     end
   end
 
-  def dice_roll(operators, operands)
-    p operators
-    p operands
+  def dice_roll(operators, operands, event)
+    dices = []
+    if operators.empty?
+      dices = dice_roller(operands[0])
+      result = dices.sum
+      event.respond "#{event.message.author.mention} here are the dices: #{dices}. And this is the sum: #{result}"
+    else
+      until operators.empty?
+        a = operands.shift
+        b = operands.shift
+        op = operators.shift
+        if a.length.eql? 2
+          a = dice_roller(a)
+          dices << a
+        end
+        if b.length.eql? 2
+          b = dice_roller(b)
+          dices << b
+        end
+        operands.unshift(calculator(a, b, op))
+      end
+      result = operands[0]
+      event.respond "#{event.message.author.mention} the dices were: #{dices} and the result was: #{result}"
+    end
   end
 
   def bot_run(bot)
