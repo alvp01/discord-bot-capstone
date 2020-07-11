@@ -84,3 +84,19 @@ def calculator_adv(op1, flg1, op2, flg2, ops)
   x = x.send(ops, y)
   res << x
 end
+
+def calculator_dis(op1, flg1, op2, flg2, ops)
+  res = []
+  x = if flg1
+        op1.min
+      else
+        op1.length != 1 ? op1.sum : op1[0]
+      end
+  y = if flg2
+        op2.min
+      else
+        op2.length != 1 ? op2.sum : op2[0]
+      end
+  x = x.send(ops, y)
+  res << x
+end

@@ -60,7 +60,7 @@ class DwarfBot
     elsif adv
       dice_roll_adv(operators, values, event)
     else
-      puts 'hello 3'
+      dice_roll_dis(operators, values, event)
     end
   end
 
@@ -114,6 +114,36 @@ class DwarfBot
           dices << b
         end
         operands.unshift(calculator_adv(a, x, b, y, op))
+      end
+      event.respond "The dices were: #{dices} and the result was: #{operands[0]}"
+    end
+  end
+
+  def dice_roll_dis(operators, operands, event)
+    dices = []
+    if operators.empty?
+      x = operands[0]
+      x[0] = 2 if x[0] != 2
+      dices = dice_roller(x)
+      event.respond "The dices were #{dices} and the result is: #{dices.max}"
+    else
+      until operators.empty?
+        x = false
+        y = false
+        a = adv_dis_translator(operands.shift)
+        b = adv_dis_translator(operands.shift)
+        x = true if a.include? 20
+        y = true if b.include? 20
+        op = operators.shift
+        if a.length.eql? 2
+          a = dice_roller(a)
+          dices << a
+        end
+        if b.length.eql? 2
+          b = dice_roller(b)
+          dices << b
+        end
+        operands.unshift(calculator_dis(a, x, b, y, op))
       end
       event.respond "The dices were: #{dices} and the result was: #{operands[0]}"
     end
