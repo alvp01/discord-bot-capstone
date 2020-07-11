@@ -68,3 +68,61 @@ describe 'dice_roller' do
     expect(dice_roller(arr2)).to be_an Array
   end
 end
+
+describe 'calculator' do
+  op1 = [6, 6, 6]
+  op2 = [2]
+  ops1 = '+'
+  ops2 = '-'
+
+  it 'recieves 2 arrays as operands and an operator (+), returns an array with the sum' do
+    expect(calculator(op1, op2, ops1)).to eql([20])
+  end
+
+  it 'recieves 2 arrays as operands and an operator (-), returns an array with the substraction' do
+    expect(calculator(op1, op2, ops2)).to eql([16])
+  end
+end
+
+describe 'adv_dis_translator' do
+  dice1 = [1, 20]
+  dice2 = [5, 6]
+
+  it 'returns the dice if it is not a d20' do
+    expect(adv_dis_translator(dice2)).to eql(dice2)
+  end
+
+  it 'returns 2d20 if the dice is a d20' do
+    expect(adv_dis_translator(dice1)).to eql([2, 20])
+  end
+end
+
+describe 'calculator_adv' do
+  dice1 = [19, 11]
+  dice2 = [5, 6]
+  op2 = [5]
+  ops1 = '+'
+
+  it 'grabs the highest result from a d20 and make the calculation with the other operand' do
+    expect(calculator_adv(dice1, true, op2, false, ops1)).to eql([24])
+  end
+
+  it 'otherwise it sums the dices and make the calculation with the other operand' do
+    expect(calculator_adv(dice2, false, op2, false, ops1)).to eql([16])
+  end
+end
+
+describe 'calculator_dis' do
+  dice1 = [19, 11]
+  dice2 = [5, 6]
+  op2 = [5]
+  ops1 = '+'
+
+  it 'grabs the lowest result from a d20 and make the calculation with the other operand' do
+    expect(calculator_dis(dice1, true, op2, false, ops1)).to eql([16])
+  end
+
+  it 'otherwise it sums the dices and make the calculation with the other operand' do
+    expect(calculator_dis(dice2, false, op2, false, ops1)).to eql([16])
+  end
+end
