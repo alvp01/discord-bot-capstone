@@ -55,3 +55,16 @@ describe 'val_translator' do
     expect(val_translator(arr1)).to eql([[1, 20], [4], [2, 4], [6]])
   end
 end
+
+describe 'dice_roller' do
+  arr1 = [5]
+  arr2 = [2, 6]
+
+  it 'recieves an array and returns the array if it is a number (length 1)' do
+    expect(dice_roller(arr1)).to eql(arr1)
+  end
+
+  it 'returns an array and returns a new array with the values of the dices (length 2)' do
+    expect(dice_roller(arr2)).to be_an Array
+  end
+end
