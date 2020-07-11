@@ -61,3 +61,26 @@ def calculator(op1, op2, ops)
   x = ops == '+' ? x + y : x - y
   res << x
 end
+
+def adv_dis_translator(val)
+  if val.length.eql? 2
+    val[0] = 2 if val[1].eql? 20
+  end
+  val
+end
+
+def calculator_adv(op1, flg1, op2, flg2, ops)
+  res = []
+  x = if flg1
+        op1.max
+      else
+        op1.length != 1 ? op1.sum : op1[0]
+      end
+  y = if flg2
+        op2.max
+      else
+        op2.length != 1 ? op2.sum : op2[0]
+      end
+  x = x.send(ops, y)
+  res << x
+end
