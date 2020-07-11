@@ -5,7 +5,7 @@ describe 'msg_splitter' do
   msg2 = 'd20 + 4 + d4 + 6 * 3 * d5'
   msg3 = 'd100 adv'
 
-  it 'recieves a string with parameters and returns an array of arrays' do
+  it 'recieves a string with parameters and returns an array of string arrays' do
     expect(msg_splitter(msg1)).to eql([['+', '+', '+'], %w[d20 4 d4 6]])
   end
 
@@ -42,8 +42,16 @@ describe 'dice_parser' do
   arr1 = %w[d20 4 d4 6]
 
   context 'it should not recieve any empty array because the validator prevents it' do
-    it 'returns and array of arrays with the values of the dices' do
+    it 'returns and array of string arrays with the values of the dices' do
       expect(dice_parser(arr1)).to eql([['', '20'], ['4'], ['', '4'], ['6']])
     end
+  end
+end
+
+describe 'val_translator' do
+  arr1 = [['', '20'], ['4'], %w[2 4], ['6']]
+
+  it 'recieves an array of string arrays and convert the values to integer' do
+    expect(val_translator(arr1)).to eql([[1, 20], [4], [2, 4], [6]])
   end
 end
