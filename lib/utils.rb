@@ -6,6 +6,8 @@ def msg_splitter(msg)
 end
 
 def msg_validator(arr)
+  return false if arr[1].empty?
+
   v = true
   arr[1].each do |elem|
     v &&= if elem.match?(/\A\d*d{1}(4|6|8|10|12|20|100)\z/)
