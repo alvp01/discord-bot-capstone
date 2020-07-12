@@ -47,7 +47,6 @@ class DwarfBot
         roll_dis = true if arr[1].include? 'dis'
         arr[1].delete_if { |x| x.eql?('adv') or x.eql?('dis') }
         roll_arbiter(arr[0], arr[1], roll_adv, roll_dis, event)
-        event.respond "#{event.message.author.mention} roll"
       end
     end
   end
@@ -125,7 +124,7 @@ class DwarfBot
       x = operands[0]
       x[0] = 2 if x[0] != 2
       dices = dice_roller(x)
-      event.respond "The dices were #{dices} and the result is: #{dices.max}"
+      event.respond "The dices were #{dices} and the result is: #{dices.min}"
     else
       until operators.empty?
         x = false
