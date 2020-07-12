@@ -31,7 +31,7 @@ class DwarfBot
     bot.ready do |_event|
       var = bot.find_channel('general')
       var.each do |i|
-        bot.send_message(i.id, 'bot is ready')
+        bot.send_message(i.id, "Type #{ENV['BOT_PREFIX']} roll with the dices and modifiers to roll dices.e.g: d20 + 5")
       end
     end
   end
