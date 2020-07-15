@@ -109,4 +109,3 @@ Go to the project root folder and type "rspec --format documentation" to run the
 
 - One [article](https://medium.com/@goodatsports/how-to-make-a-simple-discord-bot-in-ruby-to-annoy-your-friends-f5d0438daa70) on how to make a discord bot.
 - Another [article](https://medium.com/@albert.palka/build-discord-bot-in-minutes-using-discordrb-gem-fa2da38668bb) about how to build a ruby bot and deploy it with heroku.
-- A [video](https://drive.google.com/file/d/12Gm78zbRawNcyE6pQqTgYLtTUNjZLCkk/view?usp=sharing) explaining how the bot works.
