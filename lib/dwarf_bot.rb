@@ -148,10 +148,6 @@ class DwarfBot
     end
   end
 
-  def test_method
-    puts 'hello'
-  end
-
   def bot_run(bot)
     bot.run
   end
